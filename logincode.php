@@ -48,13 +48,13 @@ if(isset($_POST['login']))
         elseif($_SESSION['auth_role'] == 'admin') // 1 = admin
         {
             $_SESSION['message'] = "Welcome to the dashboard";
-            header("Location: admin.php");
+            header("Location: board/index.php");
             exit(0);
         }
         elseif($_SESSION['auth_role'] == 'superadmin') // 2 = superadmin
         {
             $_SESSION['message'] = "Welcome Super Admin";
-            header("Location: admin.php");
+            header("Location: board/index.php");
             exit(0);
         }        
     }

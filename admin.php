@@ -6,7 +6,7 @@
     session_destroy();
     exit();
   }else{
-    header("http://localhost/SE-Alumni/login.php");
+    header("http://localhost/SE-Alumni/board/index.php");
   }
 
 ?>

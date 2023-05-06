@@ -64,7 +64,7 @@ $email = mysqli_real_escape_string($conn, $_POST['email']);
 $password = mysqli_real_escape_string($conn,$_POST['password']);
 $repeat_password = mysqli_real_escape_string($conn,$_POST['repeat_password']);
 $verify_token = md5(rand());
-$role = 'admin';
+// $role = 'admin';
 $hashed_pass = encrypt_ams($password);
 
 sendemail_verify("$name","$email","$verify_token");
@@ -84,7 +84,7 @@ echo"send or not?";
        }
         else
        {
-           $user_query = "INSERT INTO users (name,email,password,verify_token,role) VALUES('$name','$email','$hashed_pass','$verify_token','$role')";
+           $user_query = "INSERT INTO users (name,email,password,verify_token) VALUES('$name','$email','$hashed_pass','$verify_token')";
            $user_query_run = mysqli_query($conn,$user_query);
 
            if($user_query_run)

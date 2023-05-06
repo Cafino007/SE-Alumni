@@ -1,4 +1,5 @@
 <?php
+require_once('hash_pass.php');
 session_start();
 
 $hostName = "localhost";
@@ -14,7 +15,10 @@ if(isset($_POST['login']))
 {
     $email = mysqli_real_escape_string($conn,$_POST['email']);
     $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $unhashed_pass = encrypt_ams($password);
 
+    // $check_user = "SELECT * FROM users WHERE email = '$email' and password = '$unhashed_pass' LIMIT 1";
+    
     $login_query = "SELECT * FROM users WHERE email = '$email' and password = '$password' LIMIT 1";
     $loginquer_run = mysqli_query($conn,$login_query);
 
@@ -28,7 +32,7 @@ if(isset($_POST['login']))
           $role = $data['role'];
         }
         $_SESSION['auth']= true;
-        $_SESSION['auth_role'] = "$role"; //1 = admin , 2 = superadmin 
+        $_SESSION['auth_role'] = $role; //1 = admin , 2 = superadmin 
         $_SESSION['auth_user'] = [
             'user_id' => $user_id,
             'user_name' => $user_name
@@ -61,13 +65,4 @@ if(isset($_POST['login']))
      exit(0);
     }
 }
-
-
-
-if(isset($_POST['logout']))
-{
-    session_destroy();
-    header("Location: login.php");
-}
-
 ?>

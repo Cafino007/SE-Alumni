@@ -1,6 +1,18 @@
+<?php 
+  require_once('logincode.php');
+
+  if(!isset($_SESSION["auth_role"])) {
+    header("Location: ../index.php");
+    session_destroy();
+    exit();
+  }elseif($_SESSION["auth_role"] == 'superadmin'){
+    header("http://localhost/SE-Alumni/board/index.php");
+  }elseif($_SESSION["auth_role"] == 'admin'){
+    header("http://localhost/SE-Alumni/board/login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -10,15 +22,6 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-    <?php
-    session_start();
-
-    if(!isset($_SESSION['auth_role'])){
-        session_destroy();
-        header("location: login.php");
-    }
-    include('message.php');
-    ?>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -229,10 +232,13 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="SE-ALUMNI1/login.php" data-toggle="modal" data-target="#logoutModal">
+                                <!-- <a class="dropdown-item" href="SE-ALUMNI1/login.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
+                                </a> -->
+                                <form method="POST" action="logout.php">
+                                    <button type="submit" name="logout" id="myButton" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</button>
+                                </form>
                         </li>
                         <?php endif; ?>
 
