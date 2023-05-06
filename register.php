@@ -41,10 +41,10 @@
                               include('message.php');
                              ?>
                             
-                            <form action="registercode.php" method="post">
+                            <form action="registercode.php" method="POST">
 
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
                                         <input required type="text" name="name" class="form-control form-control-user" 
                                             placeholder="First Name">
                                     </div>

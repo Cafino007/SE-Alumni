@@ -157,25 +157,22 @@ foreach ($results_images as $row) {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="loop owl-carousel">
-                        
-                                    <?php
+                    <?php
 
-                                        foreach ($image_urls as $image_url) {
+                        foreach ($image_urls as $image_url) {
 
-                                            echo '
-                                            <div class="item">
-                                            <div class="portfolio-item">
-                                                <div class="thumb">
-                                                <img src="' . $image_url . '" alt="" width=381px height=215px">
-                                                </div>
-                                            </div>
-                                            </div>
-                                                ';
-                                                
-                                        }
-                                    ?>
-
+                            echo '
+                            <div class="item">
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                <img src="' . $image_url . '" alt="" width=381px height=215px">
+                                </div>
                             </div>
+                            </div>
+                                ';
+                        }
+                    ?>
+            </div>
     </div>
     </div>
     </div>

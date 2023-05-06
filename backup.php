@@ -1,5 +1,7 @@
 <?php
 require_once('hash_pass.php');
+session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;  
@@ -61,37 +63,35 @@ if(isset($_POST['submit']))
 
 $name = mysqli_real_escape_string($conn,$_POST['name']);
 $email = mysqli_real_escape_string($conn, $_POST['email']);
-$password = mysqli_real_escape_string($conn,$_POST['password']);
-$repeat_password = mysqli_real_escape_string($conn,$_POST['repeat_password']);
+$password = mysqli_real_escape_string($conn, $_POST['password']);
+$repeat_password = mysqli_real_escape_string($conn, $_POST['repeat_password']);
 $verify_token = md5(rand());
 $role = 'admin';
 $hashed_pass = encrypt_ams($password);
 
 sendemail_verify("$name","$email","$verify_token");
 echo"send or not?";
-
-
     if($password == $repeat_password)
     {
        $checkemail = "SELECT email FROM users WHERE email = '$email' LIMIT 1 ";
-        $checkemail_run = mysqli_query($conn,$checkemail);
+       $checkemail_run = mysqli_query($conn,$checkemail);
 
        if(mysqli_num_rows($checkemail_run)> 0)
        {
-           $_SESSION['message'] = "Email already existing!!";
-       header("Location: register.php");
-       exit(0);
+           $_SESSION['message'] = "Email already exist!!";
+           header("Location: register.php");
+           exit(0);
        }
         else
        {
-           $user_query = "INSERT INTO users (name,email,password,verify_token,role) VALUES('$name','$email','$hashed_pass','$verify_token','$role')";
-           $user_query_run = mysqli_query($conn,$user_query);
+           $user_query = "INSERT INTO users (name, email, password, verify_token, role) VALUES($name, $email, $hashed_pass, $verify_token, $role)";
+           $user_query_run = mysqli_query($conn, $user_query);
 
            if($user_query_run)
            {
             //    sendemail_verify("$name","$email","$verify_token");
                $_SESSION['message'] = "Registered Succesfully!!";
-               header("Location: register.php");
+               header("Location: login.php");
                exit(0); 
            }
             else
@@ -181,9 +181,5 @@ if(isset($_POST['passwordchange']))
     }
 
 }
-
-
-
-
 
 ?>
